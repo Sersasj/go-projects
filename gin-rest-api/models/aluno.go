@@ -9,7 +9,7 @@ import (
 type Aluno struct {
 	gorm.Model
 	Nome  string `json:"nome" validate:"nonzero"`
-	Idade int    `json:"idade" validate:"min=0, max=100, regexp=^[0-9]*$"`
+	Idade int    `json:"idade" validate:"min=0, max=100"`
 	Email string `json:"email" validate:"regexp=^[0-9a-z]+@[0-9a-z]+(\\.[0-9a-z]+)+$"`
 }
 

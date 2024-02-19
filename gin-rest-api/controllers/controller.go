@@ -3,6 +3,7 @@ package controllers
 import (
 	"go-gin-api/database"
 	"go-gin-api/models"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -77,4 +78,16 @@ func DeleteAluno(c *gin.Context) {
 	id := c.Param("id")
 	database.DB.Delete(&aluno, id)
 	c.JSON(200, gin.H{"id" + id: "deleted"})
+}
+
+func ExibePaginaIndex(c *gin.Context) {
+	var alunos []models.Aluno
+	database.DB.Find(&alunos)
+	c.HTML(200, "index.html", gin.H{
+		"alunos": alunos,
+	})
+}
+
+func RouteNotFound(c *gin.Context) {
+	c.HTML(http.StatusNotFound, "404.html", nil)
 }
